@@ -13,19 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: set up JDK
+      - name: Set up JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
 
-      - name: run tests
-        run: mvn clean test | tee test.log
+      - name: Run tests
+        run: mvn -B clean test | tee test.log
 
-      - name: build artifacts
-        run: mvn clean package
+      - name: Build package
+        run: mvn -B clean package
 
-      - name: set up artifacts
+      - name: Prepare artifacts
         run: mkdir artifacts && cp test.log target/*.jar artifacts
 
       - uses: actions/upload-artifact@v4
